@@ -2,6 +2,7 @@ import nltk
 # nltk.download('all')
 from nltk.book import *
 
+# The code speaks for itself - Jan Willruth 2022
 
 # 1.
 with open('data/news/news.txt', 'r') as f:
