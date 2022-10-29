@@ -1,7 +1,6 @@
 import csv
 import re
 import requests
-import pandas as pd
 from bs4 import BeautifulSoup
 from glob import glob
 from germalemma import GermaLemma
@@ -72,13 +71,13 @@ for sentence in split(poses):
             mapped_pos = 'V'
         elif token.pos in ['JJ']:
             mapped_pos = 'ADJ'
-        elif token.pos in []:
+        elif token.pos in ['IN']:
             mapped_pos = 'ADV'
         else:
             mapped_pos = token
         # Print the lemma here
         if mapped_pos in ['N', 'V', 'ADJ', 'ADV']:
-            print(de_lemma.find_lemma(token, mapped_pos))
+            print(de_lemma.find_lemma(str(token), mapped_pos), mapped_pos)
         else:
             print(token)
     print("===")
