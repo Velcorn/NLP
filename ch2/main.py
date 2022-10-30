@@ -39,18 +39,20 @@ with open('data/country_capital.csv', 'w') as f:
 
 
 # 2.1
-text = "Fruits like apple, orange, and mango are healthy. But they are expensive, i.e, Mr. Bean can't afford them! " \
+text = "Fruits like apple, orange, and mango are healthy. But they are expensive, i.e., Mr. Bean can't afford them! " \
        "One can order some online from www.rewe.de. Prof. Karl, Dep. of Plant Science. " \
        "Email: karl@plant.science.de. Regards!"
 # Make pattern that splits sentences properly
-pattern = r'(?<=[.?!])\s+(?=[A-Z])'
+pattern = r'(?<!Mr.)(?<!Prof.)(?<=[.?!])\s+(?=[A-Z])'
 print(re.split(pattern, text))
 
 # 2.2
 # Modify pattern for ideal tokenization
-text = "\"I said, 'what're you? Crazy?'\" said Sandowsky. \"I can't afford to do that.\""
-pattern = r'(\w+|\$[\d\.]+|\S+)'
+text = """"I said, 'what're you? Crazy?'" said Sandowsky. "I can't afford to do that."""
+# regex pattern to split into tokens, considering single and double quotation marks
+pattern = r'(?<=[\s.,;:"!?()])|(?=[\s.,;:"!?()])'
 print(re.split(pattern, text))
+
 
 # 3
 sentence2 = """Die Brände in Brasilien setzen erhebliche Mengen an klimaschädlichen Treibhausgasen frei. 
