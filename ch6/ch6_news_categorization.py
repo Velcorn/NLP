@@ -13,12 +13,13 @@ df.columns = df.columns.str.lower()
 train, test = train_test_split(df, test_size=0.2, random_state=42, stratify=df['category'])
 # Generate all possible combinations of two categories from the set b, t, e, m,
 # produce training data for each combination and evaluate the model on the test data.
-combinations = [0]  # [('b', 't'), ('b', 'e'), ('b', 'm'), ('t', 'e'), ('t', 'm'), ('e', 'm')]
+combinations = [('b', 't'), ('b', 'e'), ('b', 'm'), ('t', 'e'), ('t', 'm'), ('e', 'm'), ('b', 't', 'e', 'm')]
 for c in combinations:
-    """train_c = train[(train['category'] == c[0]) | (train['category'] == c[1])]
-    test_c = test[(test['category'] == c[0]) | (test['category'] == c[1])]"""
-
-    train_c, test_c = train.copy(), test.copy()
+    if c == ('b', 't', 'e', 'm'):
+        train_c, test_c = train.copy(), test.copy()
+    else:
+        train_c = train[(train['category'] == c[0]) | (train['category'] == c[1])]
+        test_c = test[(test['category'] == c[0]) | (test['category'] == c[1])]
 
     # Getting all the vocabularies and indexing to a unique position
     vocab = Counter()
