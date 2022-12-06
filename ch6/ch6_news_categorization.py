@@ -84,6 +84,7 @@ if __name__ == '__main__':
     # Generate all possible combinations of two categories from the set b, t, e, m for binary classification,
     # and the entire set, produce training data for each combination and evaluate the model on the test data.
     combinations = [('b', 't'), ('b', 'e'), ('b', 'm'), ('t', 'e'), ('t', 'm'), ('e', 'm'), ('b', 't', 'e', 'm')]
+    results = []
     for c in combinations:
         # num_classes is 2 or 4 depending on whether it's binary or not... Categories: b, t, e, m
         if c == ('b', 't', 'e', 'm'):
@@ -174,4 +175,7 @@ if __name__ == '__main__':
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum()
-        print(f'Accuracy of the network on the test articles: {(100 * correct // total)}%')
+        print(f'Accuracy of the network on subset {c} of the test articles: {(100 * correct // total)}%')
+        results.append([c, (100 * correct // total)])
+    for r in results:
+        print(f'Accuracy of the network on subset {r[0]} of the test articles: {r[1]}%')
