@@ -171,7 +171,7 @@ if __name__ == '__main__':
             labels = torch.LongTensor(batch_y)
             articles, labels = articles.to(device), labels.to(device)
             outputs = news_net(articles)
-            _, predicted = torch.max(outputs.titles, 1)
+            _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum()
         print(f'Accuracy of the network on the test articles: {(100 * correct // total)}%')
